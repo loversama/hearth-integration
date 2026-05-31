@@ -1,0 +1,13 @@
+{
+  "domain": "hearth",
+  "name": "Hearth Companion",
+  "codeowners": ["@loversama"],
+  "config_flow": true,
+  "dependencies": ["mqtt", "http"],
+  "documentation": "https://github.com/loversama/hearth",
+  "iot_class": "local_push",
+  "issue_tracker": "https://github.com/loversama/hearth/issues",
+  "loggers": ["custom_components.hearth"],
+  "mqtt": ["hearth/devices/#"],
+  "version": "1.0.0"
+}

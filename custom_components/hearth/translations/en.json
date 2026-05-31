@@ -1,0 +1,56 @@
+{
+  "config": {
+    "step": {
+      "user": {
+        "title": "Add Hearth Companion",
+        "description": "**Recommended: MQTT auto-discovery** — If both Home Assistant and Hearth are connected to the same MQTT broker, your device will be discovered automatically. You don't need to do anything here — just make sure:\n\n1. MQTT is configured in Home Assistant\n2. Hearth's companion is running and connected to the same MQTT broker\n3. Wait a moment — the device will appear as a notification\n\nIf auto-discovery isn't working, you can connect manually via the **Local API** below. This requires Hearth's Local API to be enabled (Settings → Companion → Local API) and only supports notifications.",
+        "menu_options": {
+          "local_api": "Connect via Local API (manual, notifications only)",
+          "mqtt_help": "Help — MQTT auto-discovery not working?"
+        }
+      },
+      "mqtt_help": {
+        "title": "MQTT Auto-Discovery Troubleshooting",
+        "description": "For MQTT auto-discovery to work:\n\n1. **Home Assistant** must have MQTT configured and connected to a broker (e.g. Mosquitto)\n2. **Hearth** must be connected to the **same** MQTT broker — check Settings → Companion → MQTT\n3. The Hearth **companion sidecar** must be running — check the status pill on Hearth's dashboard (should say 'Running')\n4. Both must be on the same MQTT broker address and port\n\nOnce connected, the device publishes to `hearth/devices/#` and Home Assistant discovers it automatically. This typically takes a few seconds.\n\n**Still not working?** Check Hearth's Logs page for MQTT connection errors, or use the Local API option as a fallback."
+      },
+      "confirm": {
+        "title": "Hearth Device Discovered",
+        "description": "A Hearth companion device **{name}** has been discovered via MQTT.\n\nThis will create:\n- **Notification service** — send desktop notifications from automations\n- **Media player** — control media playback on your PC\n- **Sensors & commands** — are published via MQTT auto-discovery and will appear automatically\n\nWould you like to add this device?"
+      },
+      "local_api": {
+        "title": "Connect via Local API",
+        "description": "Enter the IP address of the PC running Hearth. This must be the PC's network IP (not 127.0.0.1, since this runs inside Home Assistant).\n\n**Note:** The Local API only supports notifications. For full functionality (media player, sensors, commands), use MQTT auto-discovery instead.\n\nThe Local API must be enabled in Hearth: **Settings → Companion → Local API → Enable**. Default port is 5115.",
+        "data": {
+          "host": "PC IP address (e.g. 192.168.1.100)",
+          "port": "Port (default: 5115)",
+          "ssl": "Use SSL"
+        }
+      }
+    },
+    "error": {
+      "cannot_connect": "Could not connect to the Hearth device at that address. Make sure Hearth is running, the Local API is enabled (Settings → Companion → Local API), and the IP address is reachable from Home Assistant."
+    },
+    "abort": {
+      "already_configured": "This Hearth device is already configured.",
+      "invalid_discovery_payload": "Invalid discovery payload received from the device.",
+      "no_serial_number": "The device did not provide a serial number — it may be running an older version of Hearth."
+    }
+  },
+  "options": {
+    "step": {
+      "init": {
+        "title": "Hearth Notification Settings",
+        "description": "Configure the default notification title used when sending notifications to this device.",
+        "data": {
+          "default_notification_title": "Default notification title"
+        }
+      }
+    }
+  },
+  "device_automation": {
+    "trigger_type": {
+      "notifications_mqtt": "Notification action pressed (via MQTT)",
+      "notifications_event": "Notification action pressed (via Event)"
+    }
+  }
+}
